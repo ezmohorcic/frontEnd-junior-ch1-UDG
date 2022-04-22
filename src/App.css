@@ -1,0 +1,374 @@
+*{
+  font-size: 1.7vh;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  appearance: none;
+  border: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+#root{
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  height: 100vh;
+  font-size: 2vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  user-select: none;
+  background: var(--color-black-1);
+  color: var(--color-white-1);
+}
+.app-container {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+
+  /* overflow-x: scroll;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch; */
+}
+
+#centralContainer{
+  display: grid;
+  grid-auto-rows: 100%;
+  grid-auto-columns: 100%;
+}
+
+form {
+  display: flex;
+  display: inline-block;
+}
+
+.table_form {
+  grid-row: 1/2;
+  grid-column: 1/2;
+
+
+  width: 100%;
+  height: 85vh;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  /* border-collapse: collapse; */
+  /* table-layout: auto; */
+  width: 100%;
+
+  background-color: rgb(205, 235, 253);
+
+  overflow-x: scroll;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.descriptionReadRow{
+  height: 10vh;
+}
+.descriptionReadRow > p{
+  height: 100%;
+  overflow-y: scroll;
+}
+.actionsRow,.actionsEditRow{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 10vh;
+}
+.actionsEditRow{
+  height: 16vh;
+}
+
+.actionsRow > button ,.actionsEditRow > button{
+  width: 100%;
+
+  padding: 1vh 0 1vh 0;
+
+  text-align: center;
+
+  transition: 0.2s;
+}
+.actionsRow > button:hover ,.actionsEditRow > button:hover{
+  border-radius: 0.5vh;
+
+  background-color: rgba(0, 0, 0, 0.284);
+  color: white;
+
+  text-align: center;
+}
+
+th,
+td {
+   
+  /*text-align: left;
+  overflow: hidden;
+  white-space: nowrap; */
+  /* padding: 0vh 0.1vh; */
+  border: none;
+  text-align: center;
+  padding: 0 0.2vw 0 0.2vw;
+}
+
+th {
+  height: 4vh;
+  background-color: rgb(117, 201, 250);
+}
+
+td {
+  background-color: rgb(205, 235, 253);
+  border-bottom: 0.5vh solid #ffffff;
+}
+
+
+.editableRow{
+  width: 100%;
+}
+.editableCell{
+  width: 9%;
+}
+.editableCell > textarea{
+  width: 100%;
+  height: 15vh;
+
+  resize: none;
+}
+.BeschreibungCell{
+  width: 26%;
+}
+.BeschreibungCell > textarea{
+  width: 100%;
+  height: 15vh;
+
+  resize: none;
+}
+
+
+.add, .addBelow{
+  grid-row: 1/2;
+  grid-column: 1/2;
+
+  display: grid;
+  grid-auto-rows: 100%;
+  grid-auto-columns: 100%;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 1;
+
+  background-color: rgba(0, 0, 0, 0.7);
+
+}
+.addBelow{
+  z-index: -1;
+}
+
+#addOut{
+  grid-row: 1/2;
+  grid-column: 1/2;
+
+  width: 100%;
+  height: 100%; 
+
+
+}
+#addOut > p{
+  margin: 2vh 0 0 3vh;
+
+  color: white;
+
+  font-size: 1.5vw;
+  font-weight: bolder;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+#addOut > p:hover{
+  color: black;
+}
+
+#addCard{
+  grid-row: 1/2;
+  grid-column: 1/2;
+
+
+  display: flexbox;
+  flex-wrap: wrap;
+
+  width: 80vw;
+  height: fit-content;
+  min-height: 30vh;
+
+  margin: auto;
+  padding: 3vh;
+
+  border-radius: 3vw;
+
+  background-color: #6f6f6f;
+
+}
+.addNewInput{
+  height: 5vh;
+
+  margin: 1vw;
+
+  border: 0.2vh solid #6f6f6f;
+
+  background-color: rgba(205, 235, 253, 0.413);
+  
+  padding: 1vh;
+}
+.normalNewWidth{
+  width: 30%;
+  margin: 1vh 1% 1vh 1%;
+}
+.bigNewWidth{
+  width: 50%;
+  height: 10vh;
+
+  margin: 1vh 25% 1vh 25%;
+
+  resize: none;
+}
+
+#addSubmit{
+  width:100%;
+  height: fit-content;
+
+  padding: 1vh 1vw 1vh 1vw;
+
+  border-bottom-left-radius: 3vw;
+  border-bottom-right-radius: 3vw;
+  border: 2px solid transparent;
+
+  text-align: center;
+ 
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+#addSubmit:hover{
+  border-radius: 0.5vh;
+  border: 2px solid rgba(0, 0, 0, 0.284);
+
+  background-color: rgba(0, 0, 0, 0.284);
+  color: white;
+}
+
+
+
+form td:last-child {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+form * {
+}
+
+
+
+#addingButton{
+  width: 10%;
+  height: fit-content;
+
+  margin: 0;
+  padding: 2vh 1% 2vh 1%;
+
+  border-radius: 2vh;
+
+  background-color: #6f6f6f4e;
+
+  text-align: center;
+
+  cursor: pointer;
+  transition: 0.5s;
+}
+#addingButton:hover{
+  border-radius: 0.5vh;
+  background-color: #6f6f6f8e;
+}
+
+.pages{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  width: 96%;
+  margin: 3vh 2% 0 2%;
+
+}
+
+.pages ul {
+  display: flex;
+  gap: 1vh;
+
+  width: 40%;
+  margin: 0 20% 0 20%;
+  
+  justify-content: space-evenly;
+  padding: 1vh;
+}
+.pageLi{
+  padding: 0.8vh 1.8vh;
+
+  border: 2px solid transparent;
+
+  background-color: rgba(0, 0, 0, 0.141);
+  
+  cursor: pointer;
+  
+  transition: 0.5s;
+}
+.pageLi:hover,.pageCurrentLi:hover{
+  border-radius: 0.5vh;
+  border: 2px solid rgba(0, 0, 0, 0.284);
+
+  background-color: rgba(0, 0, 0, 0.284);
+}
+.pageCurrentLi{
+
+  border-radius: 0.8vh;
+  border: 2px solid rgba(0, 0, 0, 0.433);
+
+  background-color: rgba(0, 0, 0, 0.433);
+  transition: 0.8s;
+}
+
+
+
+
+/*Scrollbar*/
+/* width */
+::-webkit-scrollbar {
+  width: 0.5vw;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(205, 235, 253);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(117, 201, 250);
+  border-radius: 0.5vw;
+
+  transition: 0.5s;
+}
+
+/* Handle on hover */
+/* ::-webkit-scrollbar-thumb:hover {
+  background: #3f0071;
+  transition: 0.5s;
+} */
+/*Scrollbar*/
