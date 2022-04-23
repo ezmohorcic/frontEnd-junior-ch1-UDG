@@ -40,6 +40,8 @@ body {
   display: grid;
   grid-auto-rows: 100%;
   grid-auto-columns: 100%;
+
+  background-color: white;
 }
 
 form {
