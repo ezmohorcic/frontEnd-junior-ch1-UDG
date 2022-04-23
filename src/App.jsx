@@ -37,7 +37,7 @@ const App = () => {
     });
   }, []);
 
-  //NEW CSV
+  //DOWNLOAD CSV
   const DownloadNewCsv = () => {
     let csv = Papa.unparse(data);
     let blob = new Blob([csv], { type: "text/csv" });
@@ -48,21 +48,6 @@ const App = () => {
     a.click();
   };
 
-
-  let Search = (e) => {
-    e.preventDefault();
-    let search = searchInput;
-    let newData = data.filter(function(item) {
-      return Object.keys(item).some( (key) => String(item[key]).toLowerCase().includes(search));
-    });
-    setData(newData);
-    setSearchInput("");
-  };
-  const [searchInput, setSearchInput] = useState("");
-  const handleSearchChange = (e) => {
-    e.preventDefault();
-    setSearchInput(e.target.value);
-  };
   
   return (
     <div className="app-container">
@@ -73,9 +58,6 @@ const App = () => {
         <ItemsShow/>
         <NewItem/>
       </div>
-
-      
-
       
       <div className="pages" >
             <h2 id='addingButton' onClick={()=>setAddShow(!addShow)}>Add New</h2>
@@ -84,6 +66,7 @@ const App = () => {
 
             <h2 id='addingButton' onClick={()=>DownloadNewCsv()}>Download</h2>
       </div>
+
     </div>
   );
 };

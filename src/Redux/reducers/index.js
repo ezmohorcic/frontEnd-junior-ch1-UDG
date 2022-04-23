@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import  { DELETE_ITEM, EDIT_ITEM, LAST_PAGE, LOADING, NEW_ITEM, NEXT_PAGE, RESET_FILTER, RESET_INDEX_OF_EDIT, RESET_OPTIONS, RESET_ORDER, RESET_PAGE, SET_FILTER, SET_HEADERS, SET_INDEX_OF_EDIT, SET_ITEMS, SET_ORDER, SET_PAGE } from "../consts.js";
+import  { DELETE_ITEM, EDIT_ITEM, LAST_PAGE, LOADING, NEW_ITEM, NEXT_PAGE, RESET_FILTER, RESET_INDEX_DETAILED, RESET_INDEX_OF_EDIT, RESET_OPTIONS, RESET_ORDER, RESET_PAGE, SET_FILTER, SET_HEADERS, SET_INDEX_DETAILED, SET_INDEX_OF_EDIT, SET_ITEMS, SET_ORDER, SET_PAGE, SET_TYPE_ITEMS } from "../consts.js";
 
 const editItemReduce = (payload) =>
 {
@@ -59,6 +59,18 @@ function indexOfEdit(state=-1,action)
     else if(action.type === RESET_INDEX_OF_EDIT) return -1;
     else return state;
 }
+function indexOfDetailed(state=-1,action)
+{
+    if(action.type === SET_INDEX_DETAILED) return action.payload;
+    else if(action.type === RESET_INDEX_DETAILED) return -1;
+    else return state;
+}
+
+function typeItem(state=false,action)
+{
+    if(action.type === SET_TYPE_ITEMS) return action.payload;
+    else return state;
+}
 
 const rootReducer=combineReducers(
 {
@@ -68,6 +80,7 @@ const rootReducer=combineReducers(
     items,
     headers,
     indexOfEdit,
+    typeItem,
 
 });
     

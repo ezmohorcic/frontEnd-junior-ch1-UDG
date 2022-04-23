@@ -1,4 +1,4 @@
-import { DELETE_ITEM, EDIT_ITEM, LAST_PAGE, NEW_ITEM, NEXT_PAGE, RESET_FILTER, RESET_INDEX_OF_EDIT, RESET_OPTIONS, RESET_ORDER, RESET_PAGE, SET_FILTER, SET_HEADERS, SET_INDEX_OF_EDIT, SET_ITEMS, SET_ORDER, SET_PAGE } from "../consts";
+import { DELETE_ITEM, EDIT_ITEM, LAST_PAGE, NEW_ITEM, NEXT_PAGE, RESET_FILTER, RESET_INDEX_OF_EDIT, RESET_OPTIONS, RESET_ORDER, RESET_PAGE, SET_FILTER, SET_HEADERS, SET_INDEX_DETAILED, SET_INDEX_OF_EDIT, SET_ITEMS, SET_ORDER, SET_PAGE, SET_TYPE_ITEMS } from "../consts";
 
 
 /* PAGE */
@@ -75,7 +75,22 @@ export function action_Reset_index_edit()
 }
 export function action_Set_headers(payload)
 {
-
     return {type:SET_HEADERS,payload}
 }
 /* ITEMS */
+
+/* DETAILED */
+
+export function action_Set_type_list(payload)
+{
+    return {type:SET_TYPE_ITEMS,payload}
+}
+export function action_Set__card_detailed(payload)
+{
+    return {type:SET_INDEX_DETAILED,payload}
+}
+export function action_Reset__card_detailed()
+{
+    return {type:RESET_INDEX_OF_EDIT}
+}
+/* DETAILED */
