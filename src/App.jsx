@@ -3,25 +3,25 @@ import { nanoid } from "nanoid";
 import "./App.css";
 import dataa from "./mock-data.json";
 import ReadOnlyRow from "./components/RowItem/ReadOnlyRow";
-import EditableRow from "./components/EditableRow";
+import EditableRow from "./components/EditableRow/EditableRow";
 import Papa from 'papaparse';
 import artikel from './Artikel.csv';
 import { PageButtons } from './components/Paginate/PagesHud';
 import NewItem from './components/NewItem/NewItem';
 import ItemsShow from './components/ItemsShow/ItemsShow';
+import { useDispatch } from 'react-redux';
+import { action_Set_headers, action_Set_items } from './Redux/actions';
+import { DONE } from './Redux/consts';
 
 const App = () => {
-  const headers = ["Artikelname", "Bein", "Bildname", "Geschlecht", "Grammatur", "Hauptartikelnr", "Hersteller", "Herstellung", "Kragen", "Material", "Materialangaben", "Produktart", "Taschenart", "Ursprungsland", "Ärmel", "Beschreibung"];
+  //const headers = ["Artikelname", "Bein", "Bildname", "Geschlecht", "Grammatur", "Hauptartikelnr", "Hersteller", "Herstellung", "Kragen", "Material", "Materialangaben", "Produktart", "Taschenart", "Ursprungsland", "Ärmel", "Beschreibung"];
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  //const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
   const [addShow, setAddShow] = useState(false)
 
-  //const indexOfLastPost = currentPage * postsPerPage;
-  //const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  //const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
+  const dispatch = useDispatch();
   
   useEffect (() => {
     Papa.parse(artikel, {
@@ -29,9 +29,9 @@ const App = () => {
       download: true,
       header: true,
       complete: function(results) {
-        setData(results.data);
+        dispatch(action_Set_items({items:results.data,status:DONE}))
         setLoading(false);
-        headers = Object.keys(results.data[0]);
+        dispatch( action_Set_headers(Object.keys(results.data[0])));
     },
       error: function(err) {
         setError(true);
@@ -50,79 +50,79 @@ const App = () => {
   };
 
   
-  const [contacts, setContacts] = useState(dataa);
-  const [addFormData, setAddFormData] = useState({});
-  const [editFormData, setEditFormData] = useState({});
-  const [editContactId, setEditContactId] = useState(null);
+  // const [contacts, setContacts] = useState(dataa);
+  // const [addFormData, setAddFormData] = useState({});
+  // const [editFormData, setEditFormData] = useState({});
+  // const [editContactId, setEditContactId] = useState(null);
 
-  const handleAddFormChange = (event) => {
-    event.preventDefault();
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
-    const newFormData = { ...addFormData };
-    newFormData[fieldName] = fieldValue;
-    setAddFormData(newFormData);
-  };
+  // const handleAddFormChange = (event) => {
+  //   event.preventDefault();
+  //   const fieldName = event.target.getAttribute("name");
+  //   const fieldValue = event.target.value;
+  //   const newFormData = { ...addFormData };
+  //   newFormData[fieldName] = fieldValue;
+  //   setAddFormData(newFormData);
+  // };
 
-  const handleEditFormChange = (event) => {
-    event.preventDefault();
+  // const handleEditFormChange = (event) => {
+  //   event.preventDefault();
 
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
+  //   const fieldName = event.target.getAttribute("name");
+  //   const fieldValue = event.target.value;
 
-    const newFormData = { ...editFormData };
-    newFormData[fieldName] = fieldValue;
+  //   const newFormData = { ...editFormData };
+  //   newFormData[fieldName] = fieldValue;
 
-    setEditFormData(newFormData);
-  };
+  //   setEditFormData(newFormData);
+  // };
 
-  const handleAddFormSubmit = (event) => {
-    event.preventDefault();
-    const newRow = headers.reduce((obj, header) => {
-      obj[header] = addFormData[header];
-      return obj;
-    }, {});
-    setData([...data, newRow]);
-  };
+  // const handleAddFormSubmit = (event) => {
+  //   event.preventDefault();
+  //   const newRow = headers.reduce((obj, header) => {
+  //     obj[header] = addFormData[header];
+  //     return obj;
+  //   }, {});
+  //   setData([...data, newRow]);
+  // };
 
-  const handleEditFormSubmit = (event) => {
-    event.preventDefault();
+  // const handleEditFormSubmit = (event) => {
+  //   event.preventDefault();
 
-    const newData = [...data];
+  //   const newData = [...data];
 
-    const index = data.findIndex((e) => e.Hauptartikelnr === editContactId);
-    if(index === -1) alert("Contact not found");
+  //   const index = data.findIndex((e) => e.Hauptartikelnr === editContactId);
+  //   if(index === -1) alert("Contact not found");
 
-    newData[index] = editFormData;
+  //   newData[index] = editFormData;
 
-    setData(newData);
-    setEditContactId(null);
-  };
+  //   setData(newData);
+  //   setEditContactId(null);
+  // };
 
-  const handleEditClick = (event, e) => {
-    event.preventDefault();
-    setEditContactId(e.Hauptartikelnr);
-    const formValues = headers.reduce((obj, header) => {
-      obj[header] = e[header];
-      return obj;
-    }, {});
+  // const handleEditClick = (event, e) => {
+  //   event.preventDefault();
+  //   setEditContactId(e.Hauptartikelnr);
+  //   const formValues = headers.reduce((obj, header) => {
+  //     obj[header] = e[header];
+  //     return obj;
+  //   }, {});
 
-    setEditFormData(formValues);
-  };
+  //   setEditFormData(formValues);
+  // };
 
-  const handleCancelClick = () => {
-    setEditContactId(null);
-  };
+  // const handleCancelClick = () => {
+  //   setEditContactId(null);
+  // };
 
-  const handleDeleteClick = (id) => {
-    const newData = [...data];
+  // const handleDeleteClick = (id) => {
+  //   const newData = [...data];
 
-    const index = data.findIndex((e) => e.Hauptartikelnr === id);
+  //   const index = data.findIndex((e) => e.Hauptartikelnr === id);
 
-    newData.splice(index, 1);
+  //   newData.splice(index, 1);
 
-    setData(newData);
-  };
+  //   setData(newData);
+  // };
 
   let Search = (e) => {
     e.preventDefault();
@@ -151,7 +151,7 @@ const App = () => {
 
       <div id="centralContainer">
         <ItemsShow/>
-        <NewItem addShow={addShow} headers={headers} setAddShow={setAddShow} handleAddFormSubmit={handleAddFormSubmit} handleAddFormChange={handleAddFormChange}/>
+        <NewItem/>
       </div>
 
       

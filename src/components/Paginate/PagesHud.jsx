@@ -5,12 +5,12 @@ import { action_Last_page, action_Next_page, action_Set_page } from '../../Redux
 
 import css from './PagesHud.module.css';
 
-export function PageButtons({items,setCurrentPage})
+export function PageButtons()
 {
     //REDUX
     const dispatch = useDispatch();
     const page = useSelector (state => state.page);
-
+    const items = useSelector (state => state.items.items);
     //CTEs
     const pageBounds = Math.ceil(items.length/10);
 

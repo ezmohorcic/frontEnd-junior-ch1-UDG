@@ -21,7 +21,10 @@ export const RESET_PAGE = "RESET_PAGE";
 export const SET_ITEMS = "SET_ITEMS";
 export const NEW_ITEM = "NEW_ITEM";
 export const EDIT_ITEM = "EDIT_ITEM";
+export const DELETE_ITEM = "DELETE_ITEM";
+
 export const SET_HEADERS = "SET_HEADERS";
+
 export const SET_INDEX_OF_EDIT = "SET_INDEX_OF_EDIT";
 export const RESET_INDEX_OF_EDIT = "RESET_INDEX_OF_EDIT";
 

@@ -1,6 +1,12 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { action_Set_index_edit } from "../../Redux/actions";
 
-const ReadOnlyRow = ({ item, handleEditClick, handleDeleteClick }) => {
+const ReadOnlyRow = ({ item, index, handleDeleteClick }) => 
+{
+
+  const dispatch = useDispatch();
+
   return (
     <tr className="readRow">
       <td>{item.Artikelname}</td>
@@ -22,7 +28,7 @@ const ReadOnlyRow = ({ item, handleEditClick, handleDeleteClick }) => {
       <td className="actionsRow">
         <button
           type="button"
-          onClick={(event) => handleEditClick(event, item)}
+          onClick={(event) => dispatch( action_Set_index_edit(index) )}
         >
           Edit
         </button>

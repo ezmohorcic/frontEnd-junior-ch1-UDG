@@ -1,4 +1,4 @@
-import { EDIT_ITEM, LAST_PAGE, NEW_ITEM, NEXT_PAGE, RESET_FILTER, RESET_OPTIONS, RESET_ORDER, RESET_PAGE, SET_FILTER, SET_ORDER, SET_PAGE } from "../consts";
+import { DELETE_ITEM, EDIT_ITEM, LAST_PAGE, NEW_ITEM, NEXT_PAGE, RESET_FILTER, RESET_INDEX_OF_EDIT, RESET_OPTIONS, RESET_ORDER, RESET_PAGE, SET_FILTER, SET_HEADERS, SET_INDEX_OF_EDIT, SET_ITEMS, SET_ORDER, SET_PAGE } from "../consts";
 
 
 /* PAGE */
@@ -49,7 +49,7 @@ export function action_Reset_Options()
 
 export function action_Set_items(payload)
 {
-    return {type:SET_FILTER,payload}
+    return {type:SET_ITEMS,payload}
 }
 export function action_New_item(payload)
 {
@@ -59,6 +59,23 @@ export function action_Edit_item(payload)
 {
     return {type:EDIT_ITEM,payload}
 }
+export function action_Delete_item(payload)
+{
+    return {type:DELETE_ITEM,payload}
+}
 
 
+export function action_Set_index_edit(payload)
+{
+    return {type:SET_INDEX_OF_EDIT,payload}
+}
+export function action_Reset_index_edit()
+{
+    return {type:RESET_INDEX_OF_EDIT}
+}
+export function action_Set_headers(payload)
+{
+    console.log(payload)
+    return {type:SET_HEADERS,payload}
+}
 /* ITEMS */
