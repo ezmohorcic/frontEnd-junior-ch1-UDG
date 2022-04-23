@@ -3,7 +3,7 @@ import  { DELETE_ITEM, EDIT_ITEM, LAST_PAGE, LOADING, NEW_ITEM, NEXT_PAGE, RESET
 
 const editItemReduce = (payload) =>
 {
-    return  (item,index) => index === payload.index ? {...item,...payload.changed} : {...item}
+    return  (item,index) => index === payload.index ? {...item,...payload.itemEdited} : {...item}
 }
 const deleteItemReduce = (payload) =>
 {
@@ -16,7 +16,7 @@ function dummy(state={},action)
     else return state
 }
 
-function page(state=0,action)
+function page(state=1,action)
 {
     if(action.type===NEXT_PAGE) return state+1;
     else if(action.type===LAST_PAGE) return state-1;
@@ -25,13 +25,13 @@ function page(state=0,action)
     else return state;
 }
 
-function options(state={filter:"",order:{}},action)
+function options(state={filter:"",order:[]},action)
 {
     if(action.type===SET_FILTER) return {...state,filter:action.payload};
     else if(action.type===RESET_FILTER) return {...state,filter:""};
-    else if(action.type===SET_ORDER) return {...state,order:{...state.order,[action.payload.key]:action.payload.value}};
-    else if(action.type===RESET_ORDER) return {...state,order:{} };
-    else if(action.type===RESET_OPTIONS) return {filter:"",order:{}};
+    else if(action.type===SET_ORDER) return {...state,order:action.payload};
+    else if(action.type===RESET_ORDER) return {...state,order:[] };
+    else if(action.type===RESET_OPTIONS) return {filter:"",order:[]};
     else return state;
 }
 
@@ -42,8 +42,8 @@ function items(state={items:[],status:LOADING},action)
 
     if(action.type===SET_ITEMS) return action.payload;
     else if(action.type===NEW_ITEM) return [...state, action.payload];
-    else if(action.type===EDIT_ITEM) return state.map(editItem);
-    else if(action.type===DELETE_ITEM) return state.filter(deleteItem);
+    else if(action.type===EDIT_ITEM) return {...state,items:state.items.map(editItem)}
+    else if(action.type===DELETE_ITEM) return {...state,items:state.items.filter(deleteItem)};
     else return state;
 }
 

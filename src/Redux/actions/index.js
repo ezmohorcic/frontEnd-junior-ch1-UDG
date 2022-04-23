@@ -75,7 +75,7 @@ export function action_Reset_index_edit()
 }
 export function action_Set_headers(payload)
 {
-    console.log(payload)
+
     return {type:SET_HEADERS,payload}
 }
 /* ITEMS */

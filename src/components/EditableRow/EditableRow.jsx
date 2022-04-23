@@ -1,178 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { action_Edit_item, action_Reset_index_edit } from "../../Redux/actions";
 
-const EditableRow = ({
-  editFormData,
-  handleEditFormChange,
-  handleCancelClick,
-}) => {
+const EditableRow = ({editFormData, index}) => 
+{
+
+  //STATES
+  const [itemEdited,setItemEdited] = useState({...editFormData});
+
+  //REDUX
+  const headers = useSelector( state => state.headers );
+  const dispatch = useDispatch();
+
+  //HANDLERS 
+  const handleEdit = (e) =>
+  { 
+    e.preventDefault();
+    setItemEdited({...itemEdited, [e.target.getAttribute("name")]:e.target.value});
+  }
+  const handleCancel = (e) =>
+  { 
+    e.preventDefault();
+    dispatch( action_Reset_index_edit() );
+  }
+  const handleSave = (e)=>
+  {
+    e.preventDefault();
+    dispatch( action_Edit_item({index,itemEdited}) );
+    dispatch( action_Reset_index_edit() );
+  }
+
   return (
     <tr className="editableRow">
-      <td className="editableCell">
-        <textarea
-          type="text"
-          /* required="required" */
-          placeholder="Artikelname"
-          name="Artikelname"
-          value={editFormData.Artikelname}
-          onChange={handleEditFormChange}
-        ></textarea>
-      </td>
-      <td className="editableCell">
-        <textarea
-          type="text"
-          /* required="required" */
-          placeholder="Bein"
-          name="Bein"
-          value={editFormData.Bein}
-          onChange={handleEditFormChange}
-        ></textarea>
-      </td>
-      <td className="BeschreibungCell">
-        <textarea
-          type="text"
-          /* required="required" */
-          placeholder="Beschreibung"
-          id="BeschreibungEdit"
-          name="Beschreibung"
-          value={editFormData.Beschreibung}
-          onChange={handleEditFormChange}
-        ></textarea>
-      </td>
-      <td className="editableCell">
-        <textarea
-          type="text"
-          /* required="required" */
-          placeholder="Bildname"
-          name="Bildname"
-          value={editFormData.Bildname}
-          onChange={handleEditFormChange}
-        ></textarea>
-      </td>
-      <td className="editableCell">
-        <textarea
-          type="text"
-          /* required="required" */
-          placeholder="Geschlecht"
-          name="Geschlecht"
-          value={editFormData.Geschlecht}
-          onChange={handleEditFormChange}
-        ></textarea>
-      </td>
-      <td className="editableCell">
-        <textarea
-          type="text"
-          /* required="required" */
-          placeholder="Grammatur"
-          name="Grammatur"
-          value={editFormData.Grammatur}
-          onChange={handleEditFormChange}
-        ></textarea>
-      </td>
-      <td className="editableCell">
-        <textarea
-          type="text"
-          /* required="required" */
-          placeholder="Hauptartikelnr"
-          name="Hauptartikelnr"
-          value={editFormData.Hauptartikelnr}
-          onChange={handleEditFormChange}
-        ></textarea>
-      </td>
-      <td className="editableCell">
-        <textarea
-          type="text"
-          /* required="required" */
-          placeholder="Hersteller"
-          name="Hersteller"
-          value={editFormData.Hersteller}
-          onChange={handleEditFormChange}
-        ></textarea>
-      </td>
-      <td className="editableCell">
-        <textarea
-          type="text"
-          /* required="required" */
-          placeholder="Herstellung"
-          name="Herstellung"
-          value={editFormData.Herstellung}
-          onChange={handleEditFormChange}
-        ></textarea>
-      </td>
-      <td className="editableCell">
-        <textarea
-          type="text"
-          /* required="required" */
-          placeholder="Kragen"
-          name="Kragen"
-          value={editFormData.Kragen}
-          onChange={handleEditFormChange}
-        ></textarea>
-      </td>
-      <td className="editableCell">
-        <textarea
-          type="text"
-          /* required="required" */
-          placeholder="Material"
-          name="Material"
-          value={editFormData.Material}
-          onChange={handleEditFormChange}
-        ></textarea>
-      </td>
-      <td className="editableCell">
-        <textarea
-          type="text"
-          /* required="required" */
-          placeholder="Materialangaben"
-          name="Materialangaben"
-          value={editFormData.Materialangaben}
-          onChange={handleEditFormChange}
-        ></textarea>
-      </td>
-      <td className="editableCell">
-        <textarea
-          type="text"
-          /* required="required" */
-          placeholder="Produktart"
-          name="Produktart"
-          value={editFormData.Produktart}
-          onChange={handleEditFormChange}
-        ></textarea>
-      </td>
-      <td className="editableCell">
-        <textarea
-          type="text"
-          /* required="required" */
-          placeholder="Taschenart"
-          name="Taschenart"
-          value={editFormData.Taschenart}
-          onChange={handleEditFormChange}
-        ></textarea>
-      </td>
-      <td className="editableCell">
-        <textarea
-          type="text"
-          /* required="required" */
-          placeholder="Ursprungsland"
-          name="Ursprungsland"
-          value={editFormData.Ursprungsland}
-          onChange={handleEditFormChange}
-        ></textarea>
-      </td>
-      <td className="editableCell">
-        <textarea
-          type="text"
-          /* required="required" */
-          placeholder="Ärmel"
-          name="Ärmel"
-          value={editFormData.Ärmel}
-          onChange={handleEditFormChange}
-        ></textarea>
-      </td>
+      {
+        headers.map((header, index) => {
+          return (
+            header === "Beschreibung" ? 
+            <td key={"tdEdit_"+index} className="BeschreibungCell" id={index}>
+              <textarea
+                index={index}
+                type="text"
+                placeholder={header}
+                id="BeschreibungEdit"
+                name="Beschreibung"
+                value={itemEdited[header]}
+                onChange={(e)=>{handleEdit(e)}}
+              ></textarea>
+            </td> 
+            :
+            <td key={"tdEdit_"+index}  className="editableCell" id={index}>
+              <textarea
+                index={index}
+                type="text"
+                placeholder={header}
+                name={header}
+                value={itemEdited[header]}
+                onChange={(e)=>{handleEdit(e)}}
+              ></textarea>
+            </td>
+          )
+        })
+      }
       <td className="actionsEditRow">
-        <button type="submit">Save</button>
-        <button type="button" onClick={handleCancelClick}>
-          Cancel
-        </button>
+        <button type="submit" onClick={(e)=>{handleSave(e)}}>Save</button>
+        <button type="button" onClick={(e)=>{handleCancel(e)}}> Cancel</button>
       </td>
     </tr>
   );
