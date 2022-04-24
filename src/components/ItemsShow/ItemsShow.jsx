@@ -35,8 +35,6 @@ const filter_and_order = (array,options) =>
   return out;
 }
 
-
-
 function ListHeader({header})
 {
   //STATES
@@ -58,8 +56,6 @@ function ListHeader({header})
 const ListHeaders = () => useSelector( state => state.headers ).map((header,index) => <ListHeader key={"header_"+index} header={header}/>);
 
 
-
-
 export default function ItemsShow()
 {
   //REDUX
@@ -67,19 +63,13 @@ export default function ItemsShow()
   const items = useSelector (state => state.items);
   const indexOfEdit = useSelector (state => state.indexOfEdit);
   const typeItem = useSelector ( state => state.typeItem);
-  
   const options = useSelector( state => state.options)
 
   //VARIABLES FOR DISPLAY
   const itemsShow = filter_and_order(items.items,options).slice(...pagination(page));
 
-  const cardType = (
-    itemsShow.map((item, index) => {
-      return (
-        <Card index={index} item={item}/>   
-      );
-    })
-  );
+  const cardType =  itemsShow.map((item, index) =>  <Card key={"Card_"+index} index={index} item={item}/> );
+
   const listType = (
     itemsShow.map((item, index) => {
       return (
@@ -93,15 +83,13 @@ export default function ItemsShow()
   //LOADING AND ERROR STATUS RETURN
   if( items.status === LOADING) return( <div> LOADING CVS...</div>)
   if( items.status === ERROR) return( <div> ERROR ON CVS...</div>)
-    console.log(typeItem)
+
   //RETURN
   return(
     <form  className="table_form">
     <table>
       <thead><tr id='listHead'><ListHeaders/><th>Actions</th></tr></thead>
-      <tbody>
-        { typeItem ? "" : listType }
-      </tbody>
+      { typeItem ? "" : <tbody>{listType}</tbody> }
     </table>
     {typeItem ? cardType : ""}
   </form>

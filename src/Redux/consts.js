@@ -36,6 +36,8 @@ export const SET_TYPE_ITEMS = "SET_TYPE_ITEMS";
 export const SET_INDEX_DETAILED = "SET_INDEX_DETAILED";
 export const RESET_INDEX_DETAILED = "RESET_INDEX_DETAILED";
 
+export const CHANGE_NEW = "CHANGE_NEW";
+
 /* DETAILED */
 
 

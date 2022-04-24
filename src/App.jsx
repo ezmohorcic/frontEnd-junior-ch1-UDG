@@ -1,26 +1,23 @@
 import { useState, useEffect, Fragment } from 'react';
-import { nanoid } from "nanoid";
 import "./App.css";
-import dataa from "./mock-data.json";
-import ReadOnlyRow from "./components/RowItem/ReadOnlyRow";
-import EditableRow from "./components/EditableRow/EditableRow";
 import Papa from 'papaparse';
 import artikel from './Artikel.csv';
 import { PageButtons } from './components/Paginate/PagesHud';
 import NewItem from './components/NewItem/NewItem';
 import ItemsShow from './components/ItemsShow/ItemsShow';
-import { useDispatch } from 'react-redux';
-import { action_Set_headers, action_Set_items } from './Redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { action_Change_new, action_Set_headers, action_Set_items } from './Redux/actions';
 import { DONE, ERROR } from './Redux/consts';
 import Header from './components/Header/Header';
+import { DetailedCard } from './components/CardItem/Card';
 
 const App = () => {
   
   const [data, setData] = useState([]);
-  const [addShow, setAddShow] = useState(false)
 
   //REDUX
   const dispatch = useDispatch();
+  const itemsOut = useSelector( state => state.items.items )
   
   //UPDATE
   useEffect (() => {
@@ -39,7 +36,7 @@ const App = () => {
 
   //DOWNLOAD CSV
   const DownloadNewCsv = () => {
-    let csv = Papa.unparse(data);
+    let csv = Papa.unparse(itemsOut);
     let blob = new Blob([csv], { type: "text/csv" });
     let url = window.URL.createObjectURL(blob);
     let a = document.createElement("a");
@@ -48,19 +45,23 @@ const App = () => {
     a.click();
   };
 
+  //HANDLERS
+  const handlerShowNew = ()=>dispatch(action_Change_new());
+
   
   return (
     <div className="app-container">
-
+      
       <Header/>
 
       <div id="centralContainer">
         <ItemsShow/>
         <NewItem/>
+        <DetailedCard/>
       </div>
       
       <div className="pages" >
-            <h2 id='addingButton' onClick={()=>setAddShow(!addShow)}>Add New</h2>
+            <h2 id='addingButton' onClick={handlerShowNew}>Add New</h2>
             
             <PageButtons/>
 
