@@ -11,9 +11,26 @@
    
     background-color: rgba(128, 128, 128, 0.826);
 
-    z-index: 1;
+    z-index: 2;
 }   
-
-#cardDeailedUnder{
+#cardDeailedUnder,#cardDetailed{
     z-index: -1;
+}
+
+#cardDetailedBack,#cardDetailed{
+    grid-row: 1/2;
+    grid-column: 1/2;
+}
+#cardDetailed{
+    width: 50vw;
+    height: fit-content;
+
+    padding: 3vw;
+    margin: auto;
+
+    background-color: black;
+    z-index: 3;
+}
+.detailedHudCont{
+
 }

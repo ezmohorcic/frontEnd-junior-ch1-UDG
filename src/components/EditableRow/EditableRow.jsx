@@ -37,26 +37,11 @@ const EditableRow = ({editFormData, index}) =>
           return (
             header === "Beschreibung" ? 
             <td key={"tdEdit_"+index} className="BeschreibungCell" id={index}>
-              <textarea
-                index={index}
-                type="text"
-                placeholder={header}
-                id="BeschreibungEdit"
-                name="Beschreibung"
-                value={itemEdited[header]}
-                onChange={(e)=>{handleEdit(e)}}
-              ></textarea>
+              <textarea index={index} type="text" placeholder={header} id="BeschreibungEdit" name="Beschreibung" value={itemEdited[header]} onChange={(e)=>{handleEdit(e)}}/>
             </td> 
             :
             <td key={"tdEdit_"+index}  className="editableCell" id={index}>
-              <textarea
-                index={index}
-                type="text"
-                placeholder={header}
-                name={header}
-                value={itemEdited[header]}
-                onChange={(e)=>{handleEdit(e)}}
-              ></textarea>
+              <textarea index={index} type="text" placeholder={header} name={header} value={itemEdited[header]} onChange={(e)=>{handleEdit(e)}}/>
             </td>
           )
         })
