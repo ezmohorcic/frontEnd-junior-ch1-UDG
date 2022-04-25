@@ -18,7 +18,7 @@ const ReadOnlyRow = ({ item, index }) =>
         headers.map((header, index) => {
           return (
             header === "Beschreibung" ? 
-            <td key={index}  className={css.descriptionReadCell}> <p>{item.Beschreibung}</p> </td> :
+            <td key={index}  className={css.descriptionReadCell} onClick={copy}> <p>{item.Beschreibung}</p> </td> :
             <td key={index}  className={css.readCell} onClick={copy} > <p>{item[header]}</p> </td>
           );
         })

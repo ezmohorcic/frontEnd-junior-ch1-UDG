@@ -22,7 +22,7 @@ export default function Header()
     const Search = (e) => 
     {
         e.preventDefault(); 
-        dispatch( action_Set_filter(e.target.value.toLowerCase()) );
+        dispatch( action_Set_filter(searchInput.toLowerCase()) );
     };
     const handleSearchChange = (e) => 
     {

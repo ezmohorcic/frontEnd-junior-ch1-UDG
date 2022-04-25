@@ -68,7 +68,7 @@ body {
   border-radius: 0.5vw;
 
   content: "";
-  background-color: #ef233b54;
+  background-color: transparent;
   box-shadow: 0 0 0 inset #8D99AE;
   transition: 0.5s;
 }
