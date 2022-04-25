@@ -12,12 +12,9 @@ import Header from './components/Header/Header';
 import { DetailedCard } from './components/CardItem/Card';
 
 const App = () => {
-  
-  const [data, setData] = useState([]);
 
   //REDUX
   const dispatch = useDispatch();
-  const itemsOut = useSelector( state => state.items.items )
   
   //UPDATE
   useEffect (() => {
@@ -34,16 +31,7 @@ const App = () => {
     });
   }, []);
 
-  //DOWNLOAD CSV
-  const DownloadNewCsv = () => {
-    let csv = Papa.unparse(itemsOut);
-    let blob = new Blob([csv], { type: "text/csv" });
-    let url = window.URL.createObjectURL(blob);
-    let a = document.createElement("a");
-    a.href = url;
-    a.download = "Artikel.csv";
-    a.click();
-  };
+
 
   //HANDLERS
   const handlerShowNew = ()=>dispatch(action_Change_new());
@@ -64,8 +52,6 @@ const App = () => {
             <h2 id='addingButton' onClick={handlerShowNew}>Add New</h2>
             
             <PageButtons/>
-
-            <h2 id='addingButton' onClick={()=>DownloadNewCsv()}>Download</h2>
       </div>
 
     </div>

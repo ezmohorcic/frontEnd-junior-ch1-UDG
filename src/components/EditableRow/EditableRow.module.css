@@ -1,0 +1,52 @@
+.editableRow{
+    width: 100%;
+}
+
+.BeschreibungCell{
+    width: 26%;
+}
+.editableCell > textarea,.BeschreibungEdit{
+    width: 100%;
+    height: 15vh;
+
+    background-color: #EDF2F4;
+  
+    resize: none;
+  }
+
+
+.editableCell{
+    width: 9%;
+}
+
+.actionsEditRow{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #EDF2F4;
+  
+    height: 16vh;
+  }
+.actionsEditRow > button{
+    width: 96%;
+  
+    padding: 1vh 0 1vh 0;
+
+    border-radius: 1vh;
+
+    background-color: #ef233b7e;
+  
+    text-align: center;
+  
+    transition: 0.2s;
+  }
+.actionsEditRow > button:hover{
+    border-radius: 0.5vh;
+  
+    background-color: #ef233b;
+    color: white;
+  
+    text-align: center;
+  }

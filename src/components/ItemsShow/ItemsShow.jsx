@@ -9,6 +9,8 @@ import { action_Set_order } from "../../Redux/actions";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { Card } from "../CardItem/Card";
 
+import css from "./ItemsShow.module.css"; // id={css.} // className={css.}
+
 const pagination = (page) => [(page-1)*10,page*10];
 const outerLocalCompare = (a,b,order) =>
 {
@@ -51,7 +53,7 @@ function ListHeader({header})
     setType(!type);
   }
 
-  return <th  key={header}><button value={header} onClick={handleOrder}>{header} <FontAwesomeIcon icon={ type? faCaretUp: faCaretDown }/></button></th>
+  return <th className={css.listHead}  key={header}><button value={header} onClick={handleOrder}>{header} <FontAwesomeIcon icon={ type? faCaretUp: faCaretDown }/></button></th>
 }
 const ListHeaders = () => useSelector( state => state.headers ).map((header,index) => <ListHeader key={"header_"+index} header={header}/>);
 
@@ -86,9 +88,9 @@ export default function ItemsShow()
 
   //RETURN
   return(
-    <form  className="table_form">
-    <table>
-      <thead><tr id='listHead'><ListHeaders/><th>Actions</th></tr></thead>
+    <form  id={css.table_form}>
+    <table id={css.innerTable}>
+      <thead><tr id={css.listHeadTr}><ListHeaders/><th className={css.listHead} ><button >Actions</button></th></tr></thead>
       { typeItem ? "" : <tbody>{listType}</tbody> }
     </table>
     {typeItem ? cardType : ""}

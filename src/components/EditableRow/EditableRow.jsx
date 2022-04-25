@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { action_Edit_item, action_Reset_index_edit } from "../../Redux/actions";
 
+import css from "./EditableRow.module.css"; // id={css.} // className={css.}
+
 const EditableRow = ({editFormData, index}) => 
 {
 
@@ -31,22 +33,22 @@ const EditableRow = ({editFormData, index}) =>
   }
 
   return (
-    <tr className="editableRow">
+    <tr className={css.editableRow}>
       {
         headers.map((header, index) => {
           return (
             header === "Beschreibung" ? 
-            <td key={"tdEdit_"+index} className="BeschreibungCell" id={index}>
-              <textarea index={index} type="text" placeholder={header} id="BeschreibungEdit" name="Beschreibung" value={itemEdited[header]} onChange={(e)=>{handleEdit(e)}}/>
+            <td key={"tdEdit_"+index} className={css.BeschreibungCell}  id={index}>
+              <textarea index={index} type="text" placeholder={header} className={css.BeschreibungEdit} name="Beschreibung" value={itemEdited[header]} onChange={(e)=>{handleEdit(e)}}/>
             </td> 
             :
-            <td key={"tdEdit_"+index}  className="editableCell" id={index}>
+            <td key={"tdEdit_"+index}  className={css.editableCell} id={index}>
               <textarea index={index} type="text" placeholder={header} name={header} value={itemEdited[header]} onChange={(e)=>{handleEdit(e)}}/>
             </td>
           )
         })
       }
-      <td className="actionsEditRow">
+      <td className={css.actionsEditRow} >
         <button type="submit" onClick={(e)=>{handleSave(e)}}>Save</button>
         <button type="button" onClick={(e)=>{handleCancel(e)}}> Cancel</button>
       </td>

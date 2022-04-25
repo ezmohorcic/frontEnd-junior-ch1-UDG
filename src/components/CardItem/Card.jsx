@@ -101,7 +101,6 @@ export const Card = ({ item, index }) =>
 {
   //REDUX
   const dispatch = useDispatch();
-  const header = useSelector( state=> state.header );
 
   //HANDLERS
   const handleOpenDetailed = () => dispatch( action_Set__card_detailed(index))
@@ -115,10 +114,10 @@ export const Card = ({ item, index }) =>
       </div>
 
       <div>
-        <button type="button" onClick={(event) => dispatch( action_Set_index_edit(index) )}>
+        <button type="button" onClick={() => dispatch( action_Set_index_edit(index) )}>
           Edit
         </button>
-        <button type="button" onClick={(event) => dispatch( action_Delete_item(item["Hauptartikelnr"]) )}>
+        <button type="button" onClick={() => dispatch( action_Delete_item(item["Hauptartikelnr"]) )}>
           Delete
         </button>
       </div>

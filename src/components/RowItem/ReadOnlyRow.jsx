@@ -2,6 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { action_Delete_item, action_Set_index_edit } from "../../Redux/actions";
 
+import css from "./ReadOnlyRow.module.css"; // id={css.} // className={css.}
+
 export const copy = (e) => navigator.clipboard.writeText(e.target.innerHTML).then(alert("Copied!"));
 
 const ReadOnlyRow = ({ item, index }) => 
@@ -11,17 +13,17 @@ const ReadOnlyRow = ({ item, index }) =>
   const headers = useSelector( state => state.headers )
 
   return (
-    <tr className="readRow">
+    <tr className={index%2 ? css.readRow : css.readRowIp}>
       {
         headers.map((header, index) => {
           return (
             header === "Beschreibung" ? 
-            <td key={index} className="descriptionReadRow"> <p>{item.Beschreibung}</p> </td> :
-            <td key={index} onClick={copy} className={header}>{item[header]}</td>
+            <td key={index}  className={css.descriptionReadCell}> <p>{item.Beschreibung}</p> </td> :
+            <td key={index}  className={css.readCell} onClick={copy} > <p>{item[header]}</p> </td>
           );
         })
       }
-      <td className="actionsRow">
+      <td className={css.actionRow}>
         <button type="button" onClick={(event) => dispatch( action_Set_index_edit(index) )}>
           Edit
         </button>
