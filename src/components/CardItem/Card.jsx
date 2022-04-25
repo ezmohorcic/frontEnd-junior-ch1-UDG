@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { action_Delete_item, action_Edit_item, action_Reset_index_edit, action_Reset__card_detailed, action_Set_index_edit, action_Set__card_detailed } from "../../Redux/actions";
 import copy from "../RowItem/ReadOnlyRow.jsx";
 
-import css from "./Card.module.css"
-
+import css from "./Card.module.css" // id={css.} // className={css.}
+ 
 export const DetailedCard = () =>
 {
   //STATES
@@ -16,6 +16,7 @@ export const DetailedCard = () =>
   const indexOfEdit = useSelector(state => state.indexOfEdit);
   const items = useSelector( state => state.items.items );
   const headers = useSelector( state => state.headers );
+
   //UPDATE
   useEffect(()=>
   {
@@ -46,16 +47,16 @@ export const DetailedCard = () =>
   //VARIABLES FOR DISPLAY
   const editingButs = (
     <div className={css.detailedHudCont}>
-        <button type="submit" onClick={(e)=>{handleSave(e)}}>Save</button>
-        <button type="button" onClick={(e)=>{handleCancel(e)}}> Cancel</button>
+        <button id={css.leftBut} type="submit" onClick={(e)=>{handleSave(e)}}>Save</button>
+        <button id={css.rightBut} type="button" onClick={(e)=>{handleCancel(e)}}> Cancel</button>
     </div>
   );
   const detailedButs = (
     <div className={css.detailedHudCont}>
-      <button type="button" onClick={(e) => dispatch( action_Set_index_edit(indexOfDetailed) )}>
+      <button id={css.leftBut} type="button" onClick={(e) => dispatch( action_Set_index_edit(indexOfDetailed) )}>
         Edit
       </button>
-      <button type="button" onClick={(e) => dispatch( action_Delete_item(items[indexOfDetailed]["Hauptartikelnr"]) )}>
+      <button id={css.rightBut} type="button" onClick={(e) => dispatch( action_Delete_item(items[indexOfDetailed]["Hauptartikelnr"]) )}>
         Delete
       </button>
     </div>
@@ -64,13 +65,13 @@ export const DetailedCard = () =>
     headers.map((header, index) => {
       return (
         header === "Beschreibung" ? 
-        <td key={"tdEdit_"+index} className="BeschreibungCell" id={index}>
-          <textarea index={index} type="text" placeholder={header} id="BeschreibungEdit" name="Beschreibung" value={itemEdited[header]} onChange={(e)=>{handleEdit(e)}}/>
-        </td> 
+        <div className={css.BeschreibungCellEdit} key={"tdEdit_"+index} id={index}>
+          <p className={css.headerP}>{header}</p><textarea className={css.BeschreibungCellInput} index={index} type="text" placeholder={header} id="BeschreibungEdit" name="Beschreibung" value={itemEdited[header]} onChange={(e)=>{handleEdit(e)}}/>
+        </div> 
         :
-        <td key={"tdEdit_"+index}  className="editableCell" id={index}>
-          <textarea index={index} type="text" placeholder={header} name={header} value={itemEdited[header]} onChange={(e)=>{handleEdit(e)}}/>
-        </td>
+        <div className={css.editableCell} key={"tdEdit_"+index}  id={index}>
+          <p className={css.headerP}>{header}</p><textarea className={css.editableInput} index={index} type="text" placeholder={header} name={header} value={itemEdited[header]} onChange={(e)=>{handleEdit(e)}}/>
+        </div>
       )
     })
   ) : "";
@@ -78,8 +79,8 @@ export const DetailedCard = () =>
     headers.map((header, index) => {
       return (
       header === "Beschreibung" ? 
-      <td key={index} className="descriptionReadRow"> <p>{items[indexOfDetailed].Beschreibung}</p> </td> :
-      <td key={index} onClick={copy} className={header}>{items[indexOfDetailed][header]}</td>
+      <div key={index} className={css.detailedDescriptionReadRow}> <p className={css.headerP}>{header}</p> <p className={css.infoP}>{items[indexOfDetailed].Beschreibung}</p> </div> :
+      <div key={index} className={css.detailedReadRow} onClick={copy}> <p className={css.headerP}>{header}</p> <p className={css.infoP}>{header + items[indexOfDetailed][header]}</p></div>
     );
   })) : "" ;
 
@@ -106,18 +107,19 @@ export const Card = ({ item, index }) =>
   const handleOpenDetailed = () => dispatch( action_Set__card_detailed(index))
 
   return(
-    <div className="cardItemCont" onClick={handleOpenDetailed}>
+    <div className={css.cardItemCont} onClick={handleOpenDetailed}>
             
-      <div>
-        <p>{item["Artikelname"]}</p>
-        <p>{item["Beschreibung"]}</p>
+      <div className={css.infoShell}>
+        <p className={css.cardNumber}>{item["Hauptartikelnr"]}</p>
+        <p className={css.cardName}>{item["Artikelname"]}</p>
+        <p className={css.cardDescrip}>{item["Beschreibung"]}</p>
       </div>
 
-      <div>
-        <button type="button" onClick={() => dispatch( action_Set_index_edit(index) )}>
+      <div className={css.cardHudShell}>
+        <button className={css.cardEdit} type="button" onClick={() => dispatch( action_Set_index_edit(index) )}>
           Edit
         </button>
-        <button type="button" onClick={() => dispatch( action_Delete_item(item["Hauptartikelnr"]) )}>
+        <button className={css.cardDelete} type="button" onClick={() => dispatch( action_Delete_item(item["Hauptartikelnr"]) )}>
           Delete
         </button>
       </div>

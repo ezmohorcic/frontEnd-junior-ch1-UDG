@@ -1,0 +1,119 @@
+.add, .addBelow{
+    grid-row: 1/2;
+    grid-column: 1/2;
+  
+    display: grid;
+    grid-auto-rows: 100%;
+    grid-auto-columns: 100%;
+  
+    width: 100%;
+    height: 100%; 
+  
+    z-index: 1;
+  
+    background-color: rgba(0, 0, 0, 0.7);
+  
+  }
+  .addBelow{
+    z-index: -1;
+  }
+  
+  #addOut{
+    grid-row: 1/2;
+    grid-column: 1/2;
+  
+    width: 100%;
+    height: 100%; 
+  }
+  #addOut > p{
+    margin: 2vh 0 0 3vh;
+  
+    color: white;
+  
+    font-size: 1.5vw;
+    font-weight: bolder;
+  
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  #addOut > p:hover{
+    color: black;
+  }
+  
+  #addCard{
+    grid-row: 1/2;
+    grid-column: 1/2;
+  
+  
+    display: flexbox;
+    flex-wrap: wrap;
+  
+    width: 80vw;
+    height: fit-content;
+    min-height: 30vh;
+  
+    margin: auto;
+    padding: 3vh;
+  
+    border-radius: 3vw;
+  
+    background-color: #2B2D42;
+  
+  }
+  .addNewInput{
+    height: 5vh;
+  
+    margin: 1vw;
+  
+    border-radius: 1vh;
+    border: 0.2vh solid #EDF2F4;
+  
+    background-color: rgba(205, 235, 253, 0.413);
+    color: #EDF2F4;
+
+    font-size: 1.1em;
+    
+    padding: 1vh;
+  }
+  .addNewInput::placeholder{
+      color: #EDF2F4;
+      text-align: center;
+  }
+  .normalNewWidth{
+    width: 30%;
+    margin: 1vh 1% 1vh 1%;
+  }
+  .bigNewWidth{
+    width: 50%;
+    height: 10vh;
+  
+    margin: 1vh 25% 1vh 25%;
+  
+    resize: none;
+  }
+  
+  #addSubmit{
+    width:100%;
+    height: fit-content;
+  
+    padding: 1vh 1vw 1vh 1vw;
+  
+    border-bottom-left-radius: 3vw;
+    border-bottom-right-radius: 3vw;
+    border: 2px solid transparent;
+
+    background-color: #FB4866;
+  
+    text-align: center;
+   
+    cursor: pointer;
+  
+    transition: 0.2s;
+  }
+  #addSubmit:hover{
+    border-radius: 0.5vh;
+    border: 2px solid rgba(0, 0, 0, 0.284);
+  
+    background-color: #EF233C;
+    color: white;
+  }

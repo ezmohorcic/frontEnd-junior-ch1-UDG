@@ -34,3 +34,11 @@
     background-color: transparent;
     color: #EDF2F4;
 }
+
+
+#cardsCont{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+}

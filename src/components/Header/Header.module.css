@@ -79,6 +79,8 @@
 
 #downloadBut:hover{
     border-radius: 0.5vw;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
 
     background-color: #ef233bb5;
 }

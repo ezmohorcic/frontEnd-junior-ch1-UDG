@@ -1,3 +1,4 @@
+/*CARD DETAILED*/
 #cardDetailedCont,#cardDeailedUnder{
     grid-row: 1/2;
     grid-column: 1/2;
@@ -21,16 +22,254 @@
     grid-row: 1/2;
     grid-column: 1/2;
 }
+#cardDetailedBack{
+    font-size: 2em;
+    
+}
 #cardDetailed{
-    width: 50vw;
+    display: flex;
+    flex-wrap: wrap;
+
+
+    width: 86vw;
     height: fit-content;
 
     padding: 3vw;
+    padding-bottom: 0.5vh;
     margin: auto;
 
-    background-color: black;
+    border-radius: 3vw;
+
+    background-color: #2B2D42;
     z-index: 3;
 }
+
+
+
+
 .detailedHudCont{
+    display: flex;
+    justify-content: space-between;
+    
+    width: 50vw;
+    height: 4vh;
+    margin: auto;
+}
+#leftBut,#rightBut{
+    width: 25vw;
+    height: 4vh;
+    margin-right: 1vw;
+
+    box-shadow: 0 0 0 inset #8B04D9;
+    border-radius: 2vh;
+
+    transition: 0.6s;
+    cursor: pointer;
+}
+#leftBut{
+    background-color: #8D99AE;
+}
+#rightBut{
+    background-color: #EF233C;
+}
+#leftBut:hover{
+    border-radius: 1vh;
+    box-shadow: -30vw 0 0 inset #4E717F;
+    font-weight: bold;
+}
+#rightBut:hover{
+    border-radius: 1vh;
+    box-shadow: 30vw 0 0 inset #D90429;
+    font-weight: bold;
 
 }
+
+
+
+.BeschreibungCellInput{
+    width: 100%;
+    height: 10vh;
+    resize: none;
+}
+.editableInput{
+    width: 100%;
+    height: 9vh;
+    resize: none;
+}
+
+
+.BeschreibungCellEdit,.detailedDescriptionReadRow{
+    width: 40vw;
+    height: 12vh;
+    margin: 0.5vh 20vw 0.5vh 20vw;
+
+    border-radius: 1vw;
+    background-color: #EDF2F4;
+
+    overflow-y: scroll;
+}
+.editableCell,.detailedReadRow{
+    width: 25vw;
+    height: 10vh;
+    margin: 0.2vh 0.83vw 0.2vh 0.83vw;
+
+    border-radius: 1vw;
+    background-color: #EDF2F4;
+}
+.headerP{
+    border-bottom: 2px solid #8D99AE;
+    background-color: #2B2D42;
+    color: #EDF2F4;
+
+    text-align: center;
+}
+.infoP{
+    text-align: center;
+}
+/*CARD DETAILED*/
+
+
+/*CARDS*/
+
+.cardItemCont{
+    width: 16vw;
+    height: 31vh;
+
+    margin: 1.5vw;
+    padding: 0.5vw;
+
+    border-radius: 2.5vw;
+
+    background-color: #636898;
+    box-shadow: 1vw 1vw 0.5vw #ACC3CC;
+
+    transition: 0.3s;
+}
+.cardItemCont:hover{
+    width: 17vw;
+    height: 33vh;
+
+    margin: 1vw;
+    padding: 0.5vw;
+
+    border-radius: 1vw;
+
+    background-color: #FB4866;
+    box-shadow: 1.5vw 1.5vw 0.5vw #C2D3D9;
+}
+.cardItemCont:hover > .infoShell{
+    width: 15.5vw;
+    height: 27vh;
+
+    
+}
+.cardItemCont:hover > .infoShell > .cardName{
+    height: 3.5vh;
+    border-bottom: 2px solid #FA1F44;
+    font-size: 1.2em;
+}
+.cardItemCont:hover > .infoShell > .cardDescrip{
+    font-size: 1.1em;
+}
+.cardItemCont:hover > .infoShell >.cardDescrip::-webkit-scrollbar-track {
+    background: #FB4866;
+}
+.cardItemCont:hover > .cardHudShell{
+    margin-top: 0.3vh;
+    height: 5vh;
+}
+.cardItemCont:hover > .cardHudShell > .cardEdit{
+    height: 4vh;
+    border-bottom-left-radius: 1vw;
+    background-color: #AEB7C6;
+    
+}
+.cardItemCont:hover > .cardHudShell > .cardDelete{
+    height: 4vh;
+    border-bottom-right-radius: 1vw;
+    background-color: #EDF2F4;
+}
+
+
+
+.infoShell{
+    width: 14.5vw;
+    height: 26vh;
+
+    margin: 0 0.25vw 0 0.25vw;
+
+    transition: 0.3s;
+}
+.cardNumber,.cardName{
+    width: 100%;
+    height: 3vh;
+
+
+    border-bottom: 2px solid #4C5075;
+
+    text-align: center;
+    transition: 0.3s;
+}
+.cardName{
+    overflow-y: scroll;
+}
+.cardDescrip{
+    width: 100%;
+    height: 20vh;
+
+    overflow-y: scroll;
+
+    transition: 0.3s;
+}
+.cardName::-webkit-scrollbar,.cardDescrip::-webkit-scrollbar {
+    width: 0.2vw;
+
+}
+.cardName::-webkit-scrollbar-track,.cardDescrip::-webkit-scrollbar-track {
+    background: #636898;
+    transition: 0.3s;
+}
+
+
+
+.cardHudShell{
+    width: 100%;
+    height: 4vh;
+    margin-top: 0vh;
+}
+.cardEdit{
+    width: 49%;
+    height: 3.5vh;
+    margin-right: 1%;
+
+    border-bottom-left-radius: 2.5vw;
+    background-color: #8D99AE;
+    box-shadow: 0 0 0 inset #2B2D42;
+
+    cursor: pointer;
+    transition: 0.8s;
+}
+.cardDelete{
+    width: 49%;
+    height: 3.5vh;
+    margin-left: 1%;
+
+    border-bottom-right-radius: 2.5vw;
+    background-color: #D90429;
+    box-shadow: 0 0 0 inset #2B2D42;
+
+    cursor: pointer;
+    transition: 0.8s;
+}
+.cardEdit:hover{
+    box-shadow: -10vw 0 0 inset #8B04D9;
+    color: #D2D904;
+    font-weight: bold;
+}
+.cardDelete:hover{
+    box-shadow: 10vw 0 0 inset #8B04D9;
+    color: #D2D904;
+    font-weight: bold;
+}
+
+/*CARDS*/

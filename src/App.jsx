@@ -49,7 +49,7 @@ const App = () => {
       </div>
       
       <div className="pages" >
-            <h2 id='addingButton' onClick={handlerShowNew}>Add New</h2>
+            <div id='addingButtonShell'><h2 id='addingButton' onClick={handlerShowNew}>Add New</h2></div>
             
             <PageButtons/>
       </div>

@@ -66,11 +66,11 @@ export default function ItemsShow()
   const indexOfEdit = useSelector (state => state.indexOfEdit);
   const typeItem = useSelector ( state => state.typeItem);
   const options = useSelector( state => state.options)
-
+  
   //VARIABLES FOR DISPLAY
   const itemsShow = filter_and_order(items.items,options).slice(...pagination(page));
 
-  const cardType =  itemsShow.map((item, index) =>  <Card key={"Card_"+index} index={index} item={item}/> );
+  const cardType = <div id={css.cardsCont}>{itemsShow.map((item, index) =>  <Card key={"Card_"+index} index={index} item={item}/> )}</div> 
 
   const listType = (
     itemsShow.map((item, index) => {
