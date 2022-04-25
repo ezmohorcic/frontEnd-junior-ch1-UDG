@@ -74,23 +74,23 @@ body {
 }
 #addingButtonShell::before{
   top: 3vh;
-  box-shadow: 0 0 0 inset #D2D904;
+  box-shadow: 0 0 0 inset #ef233b54; /*D2D904*/
 }
 #addingButtonShell::after{
   top: -3vh;
-  box-shadow: 0 0 0 inset #8B04D9;
+  box-shadow: 0 0 0 inset #ef233b54; /*8B04D9*/
 }
 #addingButtonShell:hover::before{
 
   left: 0.25vw;
   width: 9vw;
-  box-shadow: 0 -3.5vh 0 inset #ef233b54;
-}
+  box-shadow: 0 -3.5vh 0 inset #d2d90455; /*ef233b54*/
+} 
 #addingButtonShell:hover::after{
 
   left: -0.25vw;
   width: 9vw;
-  box-shadow: 0 3.5vh 0 inset #ef233b54;
+  box-shadow: 0 3.5vh 0 inset #8b04d955; /*ef233b54*/
 }
 
 #addingButton{
@@ -125,8 +125,7 @@ body {
   border-left: 1vw solid #ef233b2c;
   border-right: 1vw solid #ef233b2c;
 
-  background-color: #ef233bb5;
-  box-shadow: 9vw 4vh 0 inset #ef233bb5;
+  background-color: #ef233bb5; 
 }
 
 

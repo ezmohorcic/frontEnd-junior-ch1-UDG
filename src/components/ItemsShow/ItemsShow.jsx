@@ -83,8 +83,8 @@ export default function ItemsShow()
   );
   
   //LOADING AND ERROR STATUS RETURN
-  if( items.status === LOADING) return( <div> LOADING CVS...</div>)
-  if( items.status === ERROR) return( <div> ERROR ON CVS...</div>)
+  if( items.status === LOADING) return( <div id={css.status}> LOADING CVS...</div>)
+  if( items.status === ERROR) return( <div id={css.status}> ERROR ON CVS...</div>)
 
   //RETURN
   return(

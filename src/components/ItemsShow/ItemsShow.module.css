@@ -42,3 +42,15 @@
     flex-direction: row;
     justify-content: space-evenly;
 }
+
+#status{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #2B2D42;
+
+    font-size: 2em;
+    font-weight: bold;
+
+}
