@@ -15,10 +15,10 @@ const EditableRow = ({editFormData, index}) =>
   const dispatch = useDispatch();
 
   //HANDLERS 
-  const handleEdit = (e) =>
+  const handleEdit = ({preventDefault,target}) =>
   { 
-    e.preventDefault();
-    setItemEdited({...itemEdited, [e.target.getAttribute("name")]:e.target.value});
+    preventDefault();
+    setItemEdited({...itemEdited, [target["name"]]:target.value});
   }
   const handleCancel = (e) =>
   { 
@@ -39,18 +39,18 @@ const EditableRow = ({editFormData, index}) =>
           return (
             header === "Beschreibung" ? 
             <td key={"tdEdit_"+index} className={css.BeschreibungCell}  id={index}>
-              <textarea index={index} type="text" placeholder={header} className={css.BeschreibungEdit} name="Beschreibung" value={itemEdited[header]} onChange={(e)=>{handleEdit(e)}}/>
+              <textarea index={index} type="text" placeholder={header} className={css.BeschreibungEdit} name="Beschreibung" value={itemEdited[header]} onChange={handleEdit}/>
             </td> 
             :
             <td key={"tdEdit_"+index}  className={css.editableCell} id={index}>
-              <textarea index={index} type="text" placeholder={header} name={header} value={itemEdited[header]} onChange={(e)=>{handleEdit(e)}}/>
+              <textarea index={index} type="text" placeholder={header} name={header} value={itemEdited[header]} onChange={handleEdit}/>
             </td>
           )
         })
       }
       <td className={css.actionsEditRow} >
-        <button type="submit" onClick={(e)=>{handleSave(e)}}>Save</button>
-        <button type="button" onClick={(e)=>{handleCancel(e)}}> Cancel</button>
+        <button type="submit" onClick={handleSave}>Save</button>
+        <button type="button" onClick={handleCancel}> Cancel</button>
       </td>
     </tr>
   );

@@ -1,9 +1,13 @@
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { action_Delete_item, action_Edit_item, action_Reset_index_edit, action_Reset__card_detailed, action_Set_index_edit, action_Set__card_detailed } from "../../Redux/actions";
-import copy from "../RowItem/ReadOnlyRow.jsx";
+
 
 import css from "./Card.module.css" // id={css.} // className={css.}
+
+const copy = (e) =>  navigator.clipboard.writeText(e.target.innerHTML).then(alert("Copied!"));
  
 export const DetailedCard = () =>
 {
@@ -18,27 +22,20 @@ export const DetailedCard = () =>
   const headers = useSelector( state => state.headers );
 
   //UPDATE
-  useEffect(()=>
-  {
-    if(indexOfEdit !== -1) setItemEdited({...items[indexOfEdit]})
-  },[indexOfEdit]);
+  useEffect(()=> { if(indexOfEdit !== -1) setItemEdited({...items[indexOfEdit]}) },[indexOfEdit]);
 
   //HANDLERS
-  const handleOut = () => dispatch( action_Reset__card_detailed() );
+  const handle_out = () => dispatch( action_Reset__card_detailed() );
   
-  const handleEdit = (e) =>
-  { 
-    e.preventDefault();
-    setItemEdited({...itemEdited, [e.target.getAttribute("name")]:e.target.value});
-  }
-  const handleCancel = (e) =>
+  const handle_edit = ({target}) => setItemEdited({...itemEdited, [target["name"]]:target.value});
+  
+  const handle_cancel = (e) =>
   { 
     e.preventDefault();
     dispatch( action_Reset_index_edit() );
   }
-  const handleSave = (e)=>
+  const handle_save = (e)=>
   {
-    console.log(indexOfDetailed,itemEdited)
     e.preventDefault();
     dispatch( action_Edit_item({index:indexOfDetailed,itemEdited:itemEdited}) );
     dispatch( action_Reset_index_edit() );
@@ -47,8 +44,8 @@ export const DetailedCard = () =>
   //VARIABLES FOR DISPLAY
   const editingButs = (
     <div className={css.detailedHudCont}>
-        <button id={css.leftBut} type="submit" onClick={(e)=>{handleSave(e)}}>Save</button>
-        <button id={css.rightBut} type="button" onClick={(e)=>{handleCancel(e)}}> Cancel</button>
+        <button id={css.leftBut} type="submit" onClick={handle_save}>Save</button>
+        <button id={css.rightBut} type="button" onClick={handle_cancel}> Cancel</button>
     </div>
   );
   const detailedButs = (
@@ -66,11 +63,13 @@ export const DetailedCard = () =>
       return (
         header === "Beschreibung" ? 
         <div className={css.BeschreibungCellEdit} key={"tdEdit_"+index} id={index}>
-          <p className={css.headerP}>{header}</p><textarea className={css.BeschreibungCellInput} index={index} type="text" placeholder={header} id="BeschreibungEdit" name="Beschreibung" value={itemEdited[header]} onChange={(e)=>{handleEdit(e)}}/>
+          <p className={css.headerP}>{header}</p>
+          <textarea className={css.BeschreibungCellInput} index={index} type="text" placeholder={header} id="BeschreibungEdit" name="Beschreibung" value={itemEdited[header]} onChange={handle_edit}/>
         </div> 
         :
         <div className={css.editableCell} key={"tdEdit_"+index}  id={index}>
-          <p className={css.headerP}>{header}</p><textarea className={css.editableInput} index={index} type="text" placeholder={header} name={header} value={itemEdited[header]} onChange={(e)=>{handleEdit(e)}}/>
+          <p className={css.headerP}>{header}</p>
+          <textarea className={css.editableInput} index={index} type="text" placeholder={header} name={header} value={itemEdited[header]} onChange={handle_edit}/>
         </div>
       )
     })
@@ -87,13 +86,13 @@ export const DetailedCard = () =>
 
 
   return(
-    <div id={indexOfDetailed!==-1 ? css.cardDetailedCont : css.cardDeailedUnder}>
-      <div id={css.cardDetailedBack} onClick={handleOut}>X</div>
+    <section id={indexOfDetailed!==-1 ? css.cardDetailedCont : css.cardDeailedUnder}>
+      <div id={css.cardDetailedBack} onClick={handle_out}> <FontAwesomeIcon icon={ faTimes }/></div>
       <div id={css.cardDetailed}>
         {indexOfEdit!==-1 ? innerEdit : innerInfo }
         {indexOfEdit!==-1 ? editingButs : detailedButs}
       </div>
-    </div>
+    </section>
   )
 }
 
@@ -104,10 +103,12 @@ export const Card = ({ item, index }) =>
   const dispatch = useDispatch();
 
   //HANDLERS
-  const handleOpenDetailed = () => dispatch( action_Set__card_detailed(index))
+  const handle_open_detailed = () => dispatch( action_Set__card_detailed(index))
+  const handle_edit = () => dispatch( action_Set_index_edit(index) )
+  const handle_delete = () => dispatch( action_Delete_item(item["Hauptartikelnr"]) )
 
   return(
-    <div className={css.cardItemCont} onClick={handleOpenDetailed}>
+    <div className={css.cardItemCont} onClick={handle_open_detailed}>
             
       <div className={css.infoShell}>
         <p className={css.cardNumber}>{item["Hauptartikelnr"]}</p>
@@ -116,10 +117,10 @@ export const Card = ({ item, index }) =>
       </div>
 
       <div className={css.cardHudShell}>
-        <button className={css.cardEdit} type="button" onClick={() => dispatch( action_Set_index_edit(index) )}>
+        <button className={css.cardEdit} type="button" onClick={ handle_edit }>
           Edit
         </button>
-        <button className={css.cardDelete} type="button" onClick={() => dispatch( action_Delete_item(item["Hauptartikelnr"]) )}>
+        <button className={css.cardDelete} type="button" onClick={ handle_delete }>
           Delete
         </button>
       </div>

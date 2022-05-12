@@ -1,11 +1,11 @@
-import { useState, useEffect, Fragment } from 'react';
+import { useEffect } from 'react';
 import "./App.css";
 import Papa from 'papaparse';
 import artikel from './Artikel.csv';
 import { PageButtons } from './components/Paginate/PagesHud';
 import NewItem from './components/NewItem/NewItem';
 import ItemsShow from './components/ItemsShow/ItemsShow';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { action_Change_new, action_Set_headers, action_Set_items } from './Redux/actions';
 import { DONE, ERROR } from './Redux/consts';
 import Header from './components/Header/Header';
@@ -30,7 +30,6 @@ const App = () => {
     error: function(err) { dispatch(action_Set_items({status:ERROR})) }
     });
   }, []);
-
 
 
   //HANDLERS

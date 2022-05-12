@@ -15,26 +15,21 @@ const pagination = (page) => [(page-1)*10,page*10];
 const outerLocalCompare = (a,b,order) =>
 {
     if(a[order] && b[order]) return a[order].localeCompare(b[order]);
-    else if (a[order] && !b[order]) return -1;
-    else if (!a[order] && b[order]) return 1;
-    else if (!a[order] && !b[order]) return 0;
-    else return 0
+    if (a[order] && !b[order]) return -1;
+    if (!a[order] && b[order]) return 1;
+    if (!a[order] && !b[order]) return 0;
+    return 0
 }
+const handle_filter_inner = (filter) => (item) => Object.keys(item).some( (key) => String(item[key]).toLowerCase().includes(filter)) ;
+const handle_order_inner = (order) => (first, second) => order[1] ?  outerLocalCompare(first, second, order[0]) : outerLocalCompare  (second, first, order[0]) ; 
+
 
 const filter_and_order = (array,options) =>
 {
-  let out=[];
-  options.filter!=="" ? 
-    out = array.filter( (item) => Object.keys(item).some( (key) => String(item[key]).toLowerCase().includes(options.filter))) 
-      : 
-    out = array;
+  const filterReducer = handle_filter_inner(options.filter)
+  const orderReducer = handle_order_inner(options.order)
 
-  options.order.length ?
-    out = out.sort(
-    (a, b) => options.order[1]===true ?  outerLocalCompare(a,b,options.order[0]) : outerLocalCompare  (b,a,options.order[0]) ) 
-      : 
-    out = out ;
-  return out;
+  return array.filter( filterReducer ).sort( orderReducer ) 
 }
 
 function ListHeader({header})
@@ -46,15 +41,16 @@ function ListHeader({header})
   const dispatch = useDispatch();
 
   //HANDLERS
-  const handleOrder = (e) =>
+  const handle_order = (e) =>
   {
     e.preventDefault();
     dispatch( action_Set_order( [header,!type]) );
     setType(!type);
   }
 
-  return <th className={css.listHead}  key={header}><button value={header} onClick={handleOrder}>{header} <FontAwesomeIcon icon={ type? faCaretUp: faCaretDown }/></button></th>
+  return <th className={css.listHead}  key={header}><button value={header} onClick={handle_order}>{header} <FontAwesomeIcon icon={ type? faCaretUp: faCaretDown }/></button></th>
 }
+
 const ListHeaders = () => useSelector( state => state.headers ).map((header,index) => <ListHeader key={"header_"+index} header={header}/>);
 
 

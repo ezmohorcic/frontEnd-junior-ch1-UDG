@@ -14,70 +14,57 @@ export function PageButtons()
     const items = useSelector (state => state.items.items);
 
     //STATE
-    let jumpPage=page;
+    const [jumpPage, setJumPage] = useState(page);
 
     //CTEs
     const pageBounds = Math.ceil(items.length/10);
 
-
     //HANDLERS 
-    function handleLastPage() { if(page!==1) dispatch( action_Last_page() ); }
-    function handleNextPage() { if(page!==pageBounds) dispatch( action_Next_page() ); }
-    function handleMiddlePage(e,newPage) { dispatch( action_Set_page(newPage) ); }
-    const handlerJumpPage = (e) =>
+    const handle_last_page = () => 
+    { 
+        if(page!==1) 
+        {
+            setJumPage(page-1);
+            dispatch( action_Last_page() );
+        } 
+    
+    }
+    const handle_next_page = () => 
+    { 
+        if(page!==pageBounds) 
+        {
+            setJumPage(page+1);
+            dispatch( action_Next_page() );
+        } 
+    
+    }
+    const handler_jump_page = ({target}) =>
     {
-        jumpPage = e.target.value;
-        dispatch( action_Set_page(parseInt(e.target.value)) )
+        const middlePage = target.value? target.value : 1;
+
+        setJumPage(middlePage);
+        dispatch( action_Set_page(parseInt(middlePage)) )
+
     }
 
     //VARIABLES FOR DISPLAY
-    let lastPageShow='';
-    let nextPageShow='';
-    let middlePage='';
-
-    //LOGIC FOR DISPLAY
-    if(page!==0){lastPageShow=<button className='pageButs' id="lastPageShell" onClick={()=>{handleLastPage()}}><FontAwesomeIcon icon={ faChevronLeft }/></button>}
-    if(page+1!==pageBounds){nextPageShow=<button className='pageButs' id="nextPageShell" onClick={()=>{handleNextPage()}}><FontAwesomeIcon icon={ faChevronRight }/></button>}
-    
-    
-    if(page===1)
+    const pageShow = 
     {
-        middlePage= (
-        <div id={css.middleShell}>
-            <button id={css.currentPage}>1</button>
-            <button className={css.sidePages} onClick={(e)=>handleMiddlePage(e,2)}>2</button>
-        </div>)
-    }
-    else if(page===pageBounds)
-    {
-        middlePage= (
-        <div id={css.middleShell}>
-            <button id={css.currentPage} onClick={(e)=>handleMiddlePage(e,(page-1))}>{page-1}</button>
-            <button className={css.sidePages}>{page}</button> 
-        </div>)
-    }
-    else
-    {
-        middlePage= (
-        <div id={css.middleShell}>
-            <button className={css.sidePages} onClick={(e)=>handleMiddlePage(e,(page-1))}>{page-1}</button>
-            <button id={css.currentPage}>{page}</button>
-            <button className={css.sidePages} onClick={(e)=>handleMiddlePage(e,(page+1))}>{page+1}</button>
-        </div>)
+        left: <button className='pageButs' id="lastPageShell" > <FontAwesomeIcon icon={ faChevronLeft }/> </button> ,
+        right: <button className='pageButs' id="nextPageShell"> <FontAwesomeIcon icon={ faChevronRight }/> </button>
     }
     
     return(
-        <div id={css.pageButsContainer}>
-            <div id={css.leftPage}>{lastPageShow}</div>
-            {middlePage}
-            <div id={css.rightPage}>{nextPageShow}</div>
+        <footer id={css.pageButsContainer}>
+            {page!==1 && <div onClick={handle_last_page} id={css.leftPage}>{pageShow.left}</div>}
+
+            {page+1!==pageBounds && <div onClick={handle_next_page} id={css.rightPage}>{pageShow.right}</div>}
 
             <div id={css.allPagesShell}>
                 <p>Jump to: </p>
-                <input type="number" name="currentPage" value={jumpPage} onChange={handlerJumpPage} min={"1"} max={pageBounds} id={css.jumpPage}  />
+                <input type="number" name="currentPage" value={jumpPage} onChange={handler_jump_page} min={"1"} max={pageBounds} id={css.jumpPage}  />
                 <button id={css.allPages}>/ {pageBounds}</button>
-            </div>
-            
-        </div>
+            </div>      
+        </footer>
     )
 }
